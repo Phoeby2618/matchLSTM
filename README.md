@@ -1,9 +1,7 @@
 # matchLSTM
 A implementation of match-lstm (tensorflow).
 
-```markdown
 [Learning Natural Language Inference with LSTM](https://arxiv.org/pdf/1512.08849.pdf)
-```
 
 ## Requirements
 
