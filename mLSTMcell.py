@@ -45,14 +45,6 @@ class MatchLSTMCell(tf.contrib.rnn.BasicLSTMCell):
             # shape H_qalpha:[bs, 2hidden]
             H_qalpha = tf.reshape(tf.matmul(alpha, self.H_q), [-1, 2 * self._num_units])
 
-            # gate
 
-            W_g = tf.get_variable("W_g", shape=(2 * self._num_units, 2 * self._num_units),
-                                  initializer=tf.contrib.layers.xavier_initializer(), dtype=tf.float32)
-            gate=tf.sigmoid(tf.matmul(H_qalpha,W_g))
-            sigH_pq=tf.multiply(gate,H_qalpha)
-
-            z = tf.concat((inputs, sigH_pq), axis=1)
-
-        output, new_state = super(MatchLSTMCell, self).__call__(z, state, scope)
+        output, new_state = super(MatchLSTMCell, self).__call__(H_qalpha, state, scope)
         return output, new_state
